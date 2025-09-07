@@ -29,10 +29,10 @@ public class UserController {
         }
     }
 
+
     @GetMapping("/users")
     public List<User> getAllUsers() {
         return userService.getAllUsers();
     }
-
 }
 
