@@ -40,5 +40,11 @@ public class CompteController {
     public List<Compte> comptesUtilisateur(@PathVariable Long userId) {
         return compteService.comptesUtilisateur(userId);
     }
+
+    @GetMapping
+    public List<Compte> getAllComptes() {
+        return compteService.getAllComptes();
+    }
+
 }
 

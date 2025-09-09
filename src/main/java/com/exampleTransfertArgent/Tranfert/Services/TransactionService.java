@@ -19,12 +19,16 @@ public class TransactionService {
         this.compteRepository = compteRepository;
     }
 
+    // Méthode pour retrouver un compte ou lever une exception
+    private Compte getCompteOrThrow(Long compteId, String type) {
+        return compteRepository.findById(compteId)
+                .orElseThrow(() -> new RuntimeException("Compte " + type + " introuvable (id=" + compteId + ")"));
+    }
+
     // Effectuer un transfert
     public Transaction transfert(Long sourceId, Long destinationId, Double montant) {
-        Compte source = compteRepository.findById(sourceId)
-                .orElseThrow(() -> new RuntimeException("Compte source introuvable"));
-        Compte destination = compteRepository.findById(destinationId)
-                .orElseThrow(() -> new RuntimeException("Compte destination introuvable"));
+        Compte source = getCompteOrThrow(sourceId, "source");
+        Compte destination = getCompteOrThrow(destinationId, "destination");
 
         if (source.getSolde() < montant) {
             throw new RuntimeException("Solde insuffisant ❌");

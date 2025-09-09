@@ -2,6 +2,7 @@ package com.exampleTransfertArgent.Tranfert.Controller;
 
 import com.exampleTransfertArgent.Tranfert.Models.Transaction;
 import com.exampleTransfertArgent.Tranfert.Services.TransactionService;
+import com.exampleTransfertArgent.Tranfert.Services.dto.TransactionRequest;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -17,13 +18,13 @@ public class TransactionController {
     }
 
     @PostMapping("/transfert")
-    public Transaction transfert(
-            @RequestParam Long sourceId,
-            @RequestParam Long destinationId,
-            @RequestParam Double montant) {
-        return transactionService.transfert(sourceId, destinationId, montant);
+    public Transaction transfert(@RequestBody TransactionRequest request) {
+        return transactionService.transfert(
+                request.getSourceId(),
+                request.getDestinationId(),
+                request.getMontant()
+        );
     }
-
     @GetMapping
     public List<Transaction> getTransactions() {
         return transactionService.getTransactions();
