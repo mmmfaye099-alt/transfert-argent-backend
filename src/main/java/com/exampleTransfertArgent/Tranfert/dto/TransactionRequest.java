@@ -1,15 +1,14 @@
-package com.exampleTransfertArgent.Tranfert.Services.dto;
+package com.exampleTransfertArgent.Tranfert.dto;
 
 public class TransactionRequest {
     private Long sourceId;
     private Long destinationId;
     private Double montant;
 
-    // Getters et setters
+    // Getters et Setters
     public Long getSourceId() {
         return sourceId;
     }
-
     public void setSourceId(Long sourceId) {
         this.sourceId = sourceId;
     }
@@ -17,7 +16,6 @@ public class TransactionRequest {
     public Long getDestinationId() {
         return destinationId;
     }
-
     public void setDestinationId(Long destinationId) {
         this.destinationId = destinationId;
     }
@@ -25,8 +23,8 @@ public class TransactionRequest {
     public Double getMontant() {
         return montant;
     }
-
     public void setMontant(Double montant) {
         this.montant = montant;
     }
 }
+

@@ -1,5 +1,6 @@
 package com.exampleTransfertArgent.Tranfert.Models;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -24,8 +25,13 @@ public class Compte {
     private User user; // un compte appartient à un utilisateur
 
     @OneToMany(mappedBy = "compteSource", cascade = CascadeType.ALL)
+    @JsonManagedReference
     private List<Transaction> transactionsSource;
 
     @OneToMany(mappedBy = "compteDestination", cascade = CascadeType.ALL)
+    @JsonManagedReference
     private List<Transaction> transactionsDestination;
+
+
+
 }

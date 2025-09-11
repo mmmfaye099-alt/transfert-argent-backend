@@ -2,6 +2,8 @@ package com.exampleTransfertArgent.Tranfert.Controller;
 
 import com.exampleTransfertArgent.Tranfert.Models.Compte;
 import com.exampleTransfertArgent.Tranfert.Services.CompteService;
+import com.exampleTransfertArgent.Tranfert.dto.CompteRequest;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -16,11 +18,14 @@ public class CompteController {
         this.compteService = compteService;
     }
 
-    @PostMapping("/create")
-    public Compte creerCompte(@RequestBody Compte compte) {
-        return compteService.creerCompte(compte);
+    // CREATE : attend CompteRequest { numero, solde, userId }
+    @PostMapping(value = "/create", consumes = "application/json", produces = "application/json")
+    public ResponseEntity<Compte> creerCompte(@RequestBody CompteRequest request) {
+        Compte created = compteService.creerCompte(request);
+        return ResponseEntity.ok(created);
     }
 
+    // --- autres endpoints existants (dépot / retrait / get / getByUser / getAll) ...
     @PostMapping("/{id}/depot")
     public Compte depot(@PathVariable Long id, @RequestParam Double montant) {
         return compteService.depot(id, montant);
@@ -45,6 +50,4 @@ public class CompteController {
     public List<Compte> getAllComptes() {
         return compteService.getAllComptes();
     }
-
 }
-
